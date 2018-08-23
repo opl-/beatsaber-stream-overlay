@@ -1,0 +1,19 @@
+$c-theme = #b70512;
+
+$c-error = #c90022;
+
+$c-font-main = #000;
+$c-font-sub = #666;
+
+// https://github.com/stylus/stylus/issues/1884
+media-wa($query)
+	@media $query
+		/{selector()}
+			{block}
+
+// Example:
+/*
++media-wa('(max-width: 420px)') {
+	display: none;
+}
+*/
