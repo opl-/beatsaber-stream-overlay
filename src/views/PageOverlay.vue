@@ -2,11 +2,14 @@
 	<div class="page-overlay" :class="[`side-${cornerSideX}`, `side-${cornerSideY}`]">
 		<template v-if="data">
 			<div class="map-info" :style="{background: progressGradient}">
-				<span>{{ data.game.scene !== 'StandardLevel' ? 'In menu' : data.beatmap.songName }}</span>
-				<span class="subname" v-if="data.beatmap && data.beatmap.songSubName">&nbsp;{{ data.beatmap.songSubName }}</span>
-				<span class="author" v-if="data.beatmap && data.beatmap.songAuthorName">&nbsp;-&nbsp;{{ data.beatmap.songAuthorName }}</span>
+				<template v-if="data.beatmap">
+					<span class="name">{{ data.beatmap.songName }}</span>
+					<span class="subname" v-if="data.beatmap.songSubName">&nbsp;{{ data.beatmap.songSubName }}</span>
+					<span class="author" v-if="data.beatmap.songAuthorName">&nbsp;-&nbsp;{{ data.beatmap.songAuthorName }}</span>
+				</template>
+				<span v-else>In menu</span>
 			</div>
-			<div class="performance-info" v-if="data.game.scene === 'StandardLevel'">
+			<div class="performance-info" v-if="data.performance">
 				<span class="hittage">HIT {{ hittage }}%</span>
 				<span class="score">SCORE {{ data.performance.score }} ({{ scorePercentage }}% - {{ data.performance.rank }})</span>
 			</div>
