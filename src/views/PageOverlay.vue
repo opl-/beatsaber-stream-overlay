@@ -43,7 +43,7 @@ export default {
 		host() {
 			let host = this.$route.query.host || 'localhost:6557';
 
-			if (host.includes(':')) host += ':6557';
+			if (!host.includes(':')) host += ':6557';
 
 			return host;
 		},
