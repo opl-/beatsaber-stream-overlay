@@ -103,7 +103,7 @@ export default {
 			}
 		},
 		updateGradient() {
-			if (!this.data || !this.data.beatmap || this.data.game.scene !== 'StandardLevel') {
+			if (!this.data || !this.data.beatmap || !this.data.beatmap.start) {
 				this.progressGradient = 'rgba(30, 24, 24, 0.7)';
 				return;
 			}
