@@ -15,6 +15,13 @@
 			Game host address<br/>
 			<input type="text" v-model="optHost" placeholder="localhost:6557" />
 		</label>
+		<label>
+			Custom color theme (use <input type="checkbox" v-model="optColorEnabled" />)<br/>
+			<input type="color" v-model="optColor" />
+			<div class="color-example" title="Preview on game background">
+				<div class="fill" :style="{backgroundColor: optColor}"></div>
+			</div>
+		</label>
 		<router-link :to="{name: 'overlay', query: urlQuery}">[Open overlay]</router-link>
 	</div>
 </template>
@@ -27,6 +34,8 @@ export default {
 		return {
 			optCorner: 'topleft',
 			optHost: null,
+			optColor: null,
+			optColorEnabled: false,
 		};
 	},
 	computed: {
@@ -34,6 +43,7 @@ export default {
 			return {
 				corner: this.optCorner || undefined,
 				host: this.optHost || undefined,
+				color: !this.optColorEnabled ? undefined : this.optColor,
 			};
 		},
 	},
@@ -66,6 +76,21 @@ export default {
 	>label {
 		display: block;
 		margin: 16px 0;
+
+		>.color-example {
+			display: inline-block;
+			width: 100px;
+			height: 30px;
+			margin-left: 16px;
+			vertical-align: middle;
+			background: linear-gradient(to right, #062f41 0, #062f41 50%, #3c0a08 50%, #3c0a08 100%);
+
+			>.fill {
+				width: 100%;
+				height: 100%;
+				opacity: 0.7;
+			}
+		}
 	}
 }
 </style>

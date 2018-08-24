@@ -1,7 +1,7 @@
 <template>
 	<div class="page-overlay" :class="[`side-${cornerSideX}`, `side-${cornerSideY}`]">
 		<template v-if="data">
-			<div class="map-info" :style="{background: progressGradient}">
+			<div class="map-info" :style="{background: progressGradient, boxShadow: themeBoxShadow}">
 				<template v-if="data.beatmap">
 					<span class="name">{{ data.beatmap.songName }}</span>
 					<span class="subname" v-if="data.beatmap.songSubName">&nbsp;{{ data.beatmap.songSubName }}</span>
@@ -9,7 +9,7 @@
 				</template>
 				<span v-else>In menu</span>
 			</div>
-			<div class="performance-info" v-if="data.performance">
+			<div class="performance-info" v-if="data.performance" :style="{textShadow: themeTextShadow}">
 				<span class="hittage">HIT {{ hittage }}%</span>
 				<span class="score">SCORE {{ data.performance.score }} ({{ scorePercentage }}% - {{ data.performance.rank }})</span>
 			</div>
@@ -49,6 +49,33 @@ export default {
 			if (!host.includes(':')) host += ':6557';
 
 			return host;
+		},
+		themeColor() {
+			let param = this.$route.query.color;
+
+			if (!param) return '183, 5, 18';
+
+			/* eslint-disable no-cond-assign */
+			let r = null;
+			if (r = /#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i.exec(param)) {
+				param = `${parseInt(r[1], 16)}, ${parseInt(r[2], 16)}, ${parseInt(r[3], 16)}`;
+			} else if (r = /#?([0-9a-f])([0-9a-f])([0-9a-f])/i.exec(param)) {
+				param = `${parseInt(r[1] + r[1], 16)}, ${parseInt(r[2] + r[2], 16)}, ${parseInt(r[3] + r[3], 16)}`;
+			} else if (r = /(\d{1,3}), *?(\d{1,3}), *?(\d{1,3})/i.exec(param)) {
+				param = `${r[1]}, ${r[2]}, ${r[3]}`;
+			} else {
+				console.warn(`Unknown color format: ${JSON.stringify(param)}`);
+				param = '255, 0, 255';
+			}
+			/* eslint-enable */
+
+			return param;
+		},
+		themeTextShadow() {
+			return `0 0 2px #fff, 0 0 6px rgb(${this.themeColor}), 0 0 14px rgb(${this.themeColor})`;
+		},
+		themeBoxShadow() {
+			return `0 0 10px rgb(${this.themeColor})`;
 		},
 		hittage() {
 			return this.data.performance.passedNotes === 0 ? 0 : Math.floor((this.data.performance.hitNotes / this.data.performance.passedNotes) * 1000) / 10;
@@ -111,7 +138,7 @@ export default {
 			const progressMS = this.data.beatmap.paused ? this.data.beatmap.paused - this.data.beatmap.start : this.now() - this.data.beatmap.start;
 			const progress = Math.round((progressMS / this.data.beatmap.length) * 1000) / 10;
 
-			this.progressGradient = `linear-gradient(to right, rgba(212, 38, 38, 0.7) 0, rgba(212, 38, 38, 0.7) ${progress}%, rgba(30, 24, 24, 0.7) ${progress}%, rgba(30, 24, 24, 0.7) 100%)`;
+			this.progressGradient = `linear-gradient(to right, rgba(${this.themeColor}, 0.7) 0, rgba(${this.themeColor}, 0.7) ${progress}%, rgba(30, 24, 24, 0.7) ${progress}%, rgba(30, 24, 24, 0.7) 100%)`;
 		},
 	},
 };
