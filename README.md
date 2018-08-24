@@ -4,7 +4,7 @@ This is a simple stream overlay for Beat Saber that uses the [Beat Saber HTTP St
 
 ## Users
 
-In order to use the overlay, visit [the configuration page](<https://opl-.github.io/beatsaber-stream-overlay#/>) to change the options. Next, copy the generated link to overlay from the configuration page and add it as a browser source in your streaming software.
+In order to use the overlay, visit [the configuration page](<https://cdn.rawgit.com/opl-/beatsaber-stream-overlay/v1.0.0/dist/index.html>) to change the options. Next, copy the generated link to overlay from the configuration page and add it as a browser source in your streaming software.
 
 ## Developers
 
