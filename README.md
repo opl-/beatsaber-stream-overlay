@@ -2,6 +2,8 @@
 
 This is a simple stream overlay for Beat Saber that uses the [Beat Saber HTTP Status plugin](https://github.com/opl-/beatsaber-http-status).
 
+![A screenshot of the overlay in action](/screenshots/overview-1.png?raw=true "Overlay using the default settings")
+
 ## Users
 
 In order to use the overlay, visit [the configuration page](<http://bs-overlay.bopl.cf/>) to change the options. Next, copy the generated link to overlay from the configuration page and add it as a browser source in your streaming software.
