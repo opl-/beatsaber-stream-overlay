@@ -13,6 +13,7 @@
 		</label>
 		<label>
 			Game host address<br/>
+			<span class="description">(leave blank unless running Beat Saber on a different machine)</span><br/>
 			<input type="text" v-model="optHost" placeholder="localhost:6557" />
 		</label>
 		<label>
@@ -76,6 +77,11 @@ export default {
 	>label {
 		display: block;
 		margin: 16px 0;
+
+		>.description {
+			font-size: 20px;
+			color: rgba(255, 255, 255, 0.7);
+		}
 
 		>.color-example {
 			display: inline-block;
