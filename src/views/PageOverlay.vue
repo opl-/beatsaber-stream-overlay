@@ -160,7 +160,7 @@ export default {
 	}
 
 	&.side-right {
-		align-items: end;
+		align-items: flex-end;
 	}
 
 	>.map-info {
